@@ -21,7 +21,7 @@
 
 #include <iostream>
 
-int main(int const argc, char const *const *const args){
+int main(void){
     std::cout << "Hello World!\n";
     return EXIT_SUCCESS;
 }

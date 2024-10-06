@@ -9,9 +9,9 @@ if (POLICY CMP0141)
   set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
-project ("SAOD1" LANGUAGES C)
-set(CMAKE_C_STANDARD 11)
-file(GLOB C_FILES "src/*.c")
+project ("OOP1" LANGUAGES CXX)
+set(CMAKE_C_STANDARD 23)
+file(GLOB C_FILES "src/*.cc")
 
 if (WIN32)
 	add_definitions("/W4 /WX") #Wall выводит ошибку "Record: 4 bytes padding addede after data member"
