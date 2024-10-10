@@ -16,8 +16,8 @@
 также их массивов, при передаче объекта в виде форм. пар-ра по умолчанию и
 возврате его по зн. в качестве результата.*/
 
-#include <climits> /*INT_MAX INT_MIN*/
-#include <ctime> /*time()*/
+#include <climits>  /*INT_MAX INT_MIN*/
+#include <ctime>    /*time()*/
 #include <iostream> /*cout*/
 
 // Вывод трассировки
@@ -58,7 +58,7 @@ class Matrix {
                     << " по адресу: " << this->ptr[i] << '\n';
         }
 
-		this->Zero();
+        this->Zero();
     }
 
     // Деструктор
@@ -79,50 +79,50 @@ class Matrix {
         delete[] this->column_count;
     }
 
-	// Вывод матрицы в stdout
+    // Вывод матрицы в stdout
     void Print() const {
         for (std::size_t i = 0; i < this->line_count; i++) {
             for (std::size_t j = 0; j < this->column_count[i]; j++)
                 std::cout << ptr[i][j] << ' ';
-            
+
             std::cout << '\n';
         }
     }
 
-	void Randomise(int const max = INT_MAX, int const min = INT_MIN) {
+    void Randomise(int const max = INT_MAX, int const min = INT_MIN) {
         for (std::size_t i = 0; i < this->line_count; i++) {
             for (std::size_t j = 0; j < this->column_count[i]; j++)
-				this->ptr[i][j] = min + std::rand() % (max + 1 - min);
-		}
-	}
+                this->ptr[i][j] = min + std::rand() % (max + 1 - min);
+        }
+    }
 
-	void Zero(){
+    void Zero() {
         for (std::size_t i = 0; i < this->line_count; i++) {
             for (std::size_t j = 0; j < this->column_count[i]; j++)
                 ptr[i][j] = 0;
         }
-	}
+    }
 };
 
 int main(void) {
-	std::srand(static_cast<unsigned int>(std::time(NULL)));
+    std::srand(static_cast<unsigned int>(std::time(NULL)));
     Matrix stackm(2);
     Matrix &heapm = *new Matrix;
-	std::cout << "Матрица 1: \n";
-	stackm.Print();
-	std::cout << "Матрица 2: \n";
-	heapm.Print();
+    std::cout << "Матрица 1: \n";
+    stackm.Print();
+    std::cout << "Матрица 2: \n";
+    heapm.Print();
 
-	std::cout << "\nРандомизация:\n";
-	stackm.Randomise(10, 0);
-	heapm.Randomise();
+    std::cout << "\nРандомизация:\n";
+    stackm.Randomise(10, 0);
+    heapm.Randomise();
 
-	std::cout << "Матрица 1: \n";
-	stackm.Print();
-	std::cout << "Матрица 2: \n";
-	heapm.Print();
+    std::cout << "Матрица 1: \n";
+    stackm.Print();
+    std::cout << "Матрица 2: \n";
+    heapm.Print();
 
-	std::cout << '\n';
+    std::cout << '\n';
     delete &heapm;
     return EXIT_SUCCESS;
 }
