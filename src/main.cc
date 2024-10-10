@@ -16,6 +16,7 @@
 также их массивов, при передаче объекта в виде форм. пар-ра по умолчанию и
 возврате его по зн. в качестве результата.*/
 
+#include <cstddef>
 #include <iostream>
 
 // Вывод трассировки
@@ -25,17 +26,37 @@ std::ostream &trace = std::cout;
 указателей на строки матрицы (линейные динамические массивы)*/
 struct Matrix {
     int **ptr;
+    std::size_t line_count;
+    std::size_t *column_count;
 
     // Конструктор без параметров
     Matrix() {
         this->ptr = nullptr;
+        this->column_count = nullptr;
+        this->line_count = 0;
         ::trace << "Адрес созданного объекта: " << this << '\n';
         ::trace << "Адрес созданной памяти: " << this->ptr << '\n';
+    }
+
+    // Деструктор
+    ~Matrix() {
+        while (this->line_count--) {
+            ::trace << "Номер удаляемой строки: " //
+                    << this->line_count           //
+                    << ". Её адрес: " << ptr + line_count << '\n';
+            delete ptr[this->line_count];
+        }
+        ::trace << "Адрес удаляемой памяти: " //
+					<< this->ptr //
+					<< " В объекте под адресом: " << this << '\n';
+        delete[] this->ptr;
     }
 };
 
 int main(void) {
-    Matrix m1;
+	Matrix stackm;
+    Matrix &heapm = *new Matrix;
     std::cout << "Hello World!\n";
+	delete &heapm;
     return EXIT_SUCCESS;
 }
