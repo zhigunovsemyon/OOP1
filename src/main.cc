@@ -21,7 +21,20 @@
 
 #include <iostream>
 
+std::ostream &trace = std::cout;
+
+struct Matrix {
+	int **ptr;
+
+	Matrix() {
+		this->ptr = nullptr;
+		trace << "Адрес созданного объекта: " << this << '\n';
+		trace << "Адрес созданной памяти: " << this->ptr << '\n';
+	}
+};
+
 int main(void){
+	Matrix m1;
     std::cout << "Hello World!\n";
     return EXIT_SUCCESS;
 }
