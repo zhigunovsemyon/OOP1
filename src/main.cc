@@ -25,12 +25,12 @@ std::ostream &trace = std::cout;
 /*Матрица переменной размерности, представленная динамическим массивом
 указателей на строки матрицы (линейные динамические массивы)*/
 class Matrix {
-private:
+  private:
     int **ptr;
     std::size_t line_count;
     std::size_t *column_count;
 
-public:
+  public:
     // Конструктор без параметров
     Matrix() {
         ::trace << "Адрес созданного объекта: " << this << '\n';
@@ -62,8 +62,8 @@ public:
             // Трассировка каждой удаляемой строки
             ::trace << "Номер удаляемой строки: " //
                     << this->line_count           //
-                    << ". Её адрес: " << ptr + line_count << '\n';
-            delete this->ptr[this->line_count];
+                    << ". Её адрес: " << this->ptr[this->line_count] << '\n';
+            delete[] this->ptr[this->line_count];
         }
 
         // Трассировка удаляемой матрицы
