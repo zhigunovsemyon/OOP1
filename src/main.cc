@@ -24,39 +24,60 @@ std::ostream &trace = std::cout;
 
 /*Матрица переменной размерности, представленная динамическим массивом
 указателей на строки матрицы (линейные динамические массивы)*/
-struct Matrix {
+class Matrix {
+private:
     int **ptr;
     std::size_t line_count;
     std::size_t *column_count;
 
+public:
     // Конструктор без параметров
     Matrix() {
+        ::trace << "Адрес созданного объекта: " << this << '\n';
         this->ptr = nullptr;
         this->column_count = nullptr;
         this->line_count = 0;
-        ::trace << "Адрес созданного объекта: " << this << '\n';
         ::trace << "Адрес созданной памяти: " << this->ptr << '\n';
+    }
+
+    // Конструктор квадратной матрицы
+    Matrix(std::size_t size) {
+        ::trace << "Адрес созданного объекта: " << this << '\n';
+        // Задание числа строк
+        this->line_count = size;
+        // Выделение памяти под вектор указателей
+        ptr = new int *[size];
+        ::trace << "Адрес созданной памяти: " << this->ptr << '\n';
+
+        for (std::size_t i = 0; i < size; i++) {
+            this->ptr[i] = new int[size];
+            ::trace << "Выделение памяти под строку " << i
+                    << " по адресу: " << this->ptr[i] << '\n';
+        }
     }
 
     // Деструктор
     ~Matrix() {
         while (this->line_count--) {
+            // Трассировка каждой удаляемой строки
             ::trace << "Номер удаляемой строки: " //
                     << this->line_count           //
                     << ". Её адрес: " << ptr + line_count << '\n';
-            delete ptr[this->line_count];
+            delete this->ptr[this->line_count];
         }
+
+        // Трассировка удаляемой матрицы
         ::trace << "Адрес удаляемой памяти: " //
-					<< this->ptr //
-					<< " В объекте под адресом: " << this << '\n';
+                << this->ptr                  //
+                << " В объекте под адресом: " << this << '\n';
         delete[] this->ptr;
     }
 };
 
 int main(void) {
-	Matrix stackm;
+    Matrix stackm(2);
     Matrix &heapm = *new Matrix;
     std::cout << "Hello World!\n";
-	delete &heapm;
+    delete &heapm;
     return EXIT_SUCCESS;
 }
