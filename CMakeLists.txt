@@ -10,7 +10,7 @@ if (POLICY CMP0141)
 endif()
 
 project ("OOP1" LANGUAGES CXX)
-set(CMAKE_C_STANDARD 23)
+set(CMAKE_CXX_STANDARD 23)
 file(GLOB C_FILES "src/*.cc")
 
 if (WIN32)
