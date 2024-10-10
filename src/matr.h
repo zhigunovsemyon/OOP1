@@ -110,4 +110,11 @@ class Matrix {
                 ptr[i][j] = 0;
         }
     }
+
+    /*Доступ к определённой строке line матрицы*/
+    int* operator[](std::size_t line){
+        /*Если запрашиваемая строка находится за пределами матрицы,
+         *возвращается null, что приведёт к падению программы*/
+        return (line < this->line_count) ? this->ptr[line] : nullptr;
+    }
 };
