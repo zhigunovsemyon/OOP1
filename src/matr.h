@@ -12,24 +12,15 @@ class Matrix {
     std::size_t line_count;    // Число строк
 
   public:
-    // Конструктор пустой матрицы без параметров
-    Matrix() {
-        ::trace << "Адрес созданного объекта: " << this << '\n';
-        this->ptr = nullptr;
-        this->rows_in_line = nullptr;
-        this->line_count = 0;
-        ::trace << "Адрес созданной памяти: " << this->ptr << '\n';
-    }
-
-    // Конструктор квадратной матрицы
-    Matrix(std::size_t size) {
+    // Конструктор квадратной матрицы, либо пустой
+    Matrix(std::size_t size = 0) {
         ::trace << "Адрес созданного объекта: " << this << '\n';
         // Задание числа строк
         this->line_count = size;
 
         // Выделение памяти под вектор указателей и размеров
-        this->ptr = new int *[size];
-        this->rows_in_line = new size_t[size];
+        this->ptr = (size) ? new int *[size] : nullptr;
+        this->rows_in_line = (size) ? new size_t[size]: nullptr;
         ::trace << "Адрес созданной памяти: " << this->ptr << '\n';
 
         // Выделение памяти под каждую строку
