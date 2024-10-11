@@ -87,7 +87,7 @@ class Matrix {
     }
 
     /*Метод для заполнения матрицы случайными числами*/
-    void Randomise(int const max = INT_MAX, int const min = INT_MIN) {
+    void Randomise(int const max, int const min) {
         for (std::size_t i = 0; i < this->line_count; i++) {
             for (std::size_t j = 0; j < this->rows_in_line[i]; j++)
                 this->ptr[i][j] = min + std::rand() % (max + 1 - min);

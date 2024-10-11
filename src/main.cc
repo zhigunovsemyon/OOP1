@@ -37,8 +37,8 @@ int main(void) {
 
     // Заполнение матриц случайными числами
     std::cout << "\nРандомизация:\n";
-    stackm.Randomise(INT_MAX - 1488);
-    heapm.Randomise();
+    stackm.Randomise(1488, 1337);
+    heapm.Randomise(10,1);
 
     // Вывод матриц после изменения
     std::cout << "Матрица 1: \n";
