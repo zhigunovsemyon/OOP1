@@ -1,6 +1,7 @@
 #pragma once
 #include <climits>
 #include <iostream>
+#include <utility>
 
 // Вывод трассировки
 std::ostream &trace = std::cout;
@@ -87,7 +88,11 @@ class Matrix {
     }
 
     /*Метод для заполнения матрицы случайными числами*/
-    void Randomise(int const max, int const min) {
+    void Randomise(int max, int min) {
+        /*Переворот значений min и max*/
+        if(min > max)
+            std::swap(max, min);
+
         for (std::size_t i = 0; i < this->line_count; i++) {
             for (std::size_t j = 0; j < this->rows_in_line[i]; j++)
                 this->ptr[i][j] = min + std::rand() % (max + 1 - min);
