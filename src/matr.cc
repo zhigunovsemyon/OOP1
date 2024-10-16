@@ -12,12 +12,12 @@ Matrix::Matrix(std::size_t size) {
 
 	// Выделение памяти под вектор указателей и размеров
 	this->ptr = (size) ? new int *[size] : nullptr;
-	this->rows_in_line = (size) ? new size_t[size] : nullptr;
+	this->columns_in_line = (size) ? new size_t[size] : nullptr;
 	::trace << "Адрес созданной памяти: " << this->ptr << '\n';
 
 	// Выделение памяти под каждую строку
 	for (std::size_t i = 0; i < size; i++) {
-		this->rows_in_line[i] = size;
+		this->columns_in_line[i] = size;
 		this->ptr[i] = new int[size];
 		::trace << "Выделение памяти под строку " << i
 			<< " по адресу: " << this->ptr[i] << '\n';
@@ -28,20 +28,20 @@ Matrix::Matrix(std::size_t size) {
 }
 
 // Конструктор прямоугольной матрицы матрицы
-Matrix::Matrix(std::size_t lines, std::size_t rows) {
+Matrix::Matrix(std::size_t lines, std::size_t columns) {
 	::trace << "Адрес созданного объекта: " << this << '\n';
 	// Задание числа строк
 	this->line_count = lines;
 
 	// Выделение памяти под вектор указателей и размеров
 	this->ptr = new int *[lines];
-	this->rows_in_line = new size_t[lines];
+	this->columns_in_line = new size_t[lines];
 	::trace << "Адрес созданной памяти: " << this->ptr << '\n';
 
 	// Выделение памяти под каждую строку
 	for (std::size_t i = 0; i < lines; i++) {
-		this->rows_in_line[i] = rows;
-		this->ptr[i] = new int[rows];
+		this->columns_in_line[i] = columns;
+		this->ptr[i] = new int[columns];
 		::trace << "Выделение памяти под строку " << i
 			<< " по адресу: " << this->ptr[i] << '\n';
 	}
@@ -66,13 +66,13 @@ Matrix::~Matrix() {
 		<< this->ptr		      //
 		<< " В объекте под адресом: " << this << '\n';
 	delete[] this->ptr;
-	delete[] this->rows_in_line;
+	delete[] this->columns_in_line;
 }
 
 // Вывод матрицы в stdout
 void Matrix::Print() const {
 	for (std::size_t i = 0; i < this->line_count; i++) {
-		for (std::size_t j = 0; j < this->rows_in_line[i]; j++)
+		for (std::size_t j = 0; j < this->columns_in_line[i]; j++)
 			std::cout << ptr[i][j] << ' ';
 
 		std::cout << '\n';
@@ -86,7 +86,7 @@ void Matrix::Randomise(int max, int min) {
 		std::swap(max, min);
 
 	for (std::size_t i = 0; i < this->line_count; i++) {
-		for (std::size_t j = 0; j < this->rows_in_line[i]; j++)
+		for (std::size_t j = 0; j < this->columns_in_line[i]; j++)
 			this->ptr[i][j] = min + std::rand() % (max + 1 - min);
 	}
 }
@@ -94,7 +94,7 @@ void Matrix::Randomise(int max, int min) {
 /*Метод зануления матрицы*/
 void Matrix::Zero() {
 	for (std::size_t i = 0; i < this->line_count; i++) {
-		for (std::size_t j = 0; j < this->rows_in_line[i]; j++)
+		for (std::size_t j = 0; j < this->columns_in_line[i]; j++)
 			ptr[i][j] = 0;
 	}
 }
