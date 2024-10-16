@@ -91,9 +91,18 @@ void Matrix::Randomise(int max, int min) {
 	}
 }
 
+std::size_t Matrix::Get_column_size(long line) {
+	/*Если пользователь запросил отрицательный элемент, отсчитывается
+	 *соответствующий элемент с конца*/
+	if (line < 0)
+		line = static_cast<long>(this->line_count) + line;
+
+	return this->columns_in_line[line];
+}
+
 std::size_t Matrix::Get_line_count(){
 	return this->line_count;
-};
+}
 
 /*Метод зануления матрицы*/
 void Matrix::Zero() {
