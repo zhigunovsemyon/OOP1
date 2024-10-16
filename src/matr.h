@@ -17,6 +17,9 @@ class Matrix {
 	// Деструктор
 	~Matrix();
 
+	// Получение числа строк матрицы
+	std::size_t Get_line_count();
+
 	// Вывод матрицы в stdout
 	void Print() const;
 

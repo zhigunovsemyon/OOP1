@@ -91,6 +91,10 @@ void Matrix::Randomise(int max, int min) {
 	}
 }
 
+std::size_t Matrix::Get_line_count(){
+	return this->line_count;
+};
+
 /*Метод зануления матрицы*/
 void Matrix::Zero() {
 	for (std::size_t i = 0; i < this->line_count; i++) {
