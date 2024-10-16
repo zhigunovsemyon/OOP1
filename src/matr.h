@@ -4,7 +4,7 @@
 class Matrix {
       private:
 	int **ptr;		   // Указатель на непосредственно матрицу
-	std::size_t *columns_in_line; // Вектор размеров строк
+	std::size_t column_count;  // Вектор размеров строк
 	std::size_t line_count;	   // Число строк
 
       public:
@@ -19,6 +19,9 @@ class Matrix {
 
 	// Получение числа строк матрицы
 	std::size_t Get_line_count();
+	
+	// Получение числа строк матрицы
+	std::size_t Get_column_count();
 
 	// Вывод матрицы в stdout
 	void Print() const;
