@@ -27,5 +27,5 @@ class Matrix {
 	void Zero();
 
 	/*Доступ к определённой строке line матрицы*/
-	int *operator[](std::size_t line);
+	int *operator[](long line);
 };

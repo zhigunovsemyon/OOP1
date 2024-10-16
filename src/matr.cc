@@ -100,8 +100,12 @@ void Matrix::Zero() {
 }
 
 /*Доступ к определённой строке line матрицы*/
-int *Matrix::operator[](std::size_t line) {
+int *Matrix::operator[](long line) {
+	/*Если пользователь запросил отрицательный элемент, отсчитывается
+	 *соответствующий элемент с конца*/
+	if (line < 0)
+		line = static_cast<long>(this->line_count) + line;
 	/*Если запрашиваемая строка находится за пределами матрицы,
 	 *возвращается null, что приведёт к падению программы*/
-	return (line < this->line_count) ? this->ptr[line] : nullptr;
+	return (line < static_cast<long>(this->line_count) && line >= 0) ? this->ptr[line] : nullptr;
 }
