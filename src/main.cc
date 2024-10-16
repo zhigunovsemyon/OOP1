@@ -16,38 +16,38 @@
 также их массивов, при передаче объекта в виде форм. пар-ра по умолчанию и
 возврате его по зн. в качестве результата.*/
 
+#include "matr.h"   /* Матрица */
 #include <climits>  /*INT_MAX INT_MIN*/
 #include <ctime>    /*time()*/
 #include <iostream> /*cout*/
-#include "matr.h" /* Матрица */
 
 int main(void) {
-    // Инициализация генератора случайных чисел
-    std::srand(static_cast<unsigned int>(std::time(NULL)));
+	// Инициализация генератора случайных чисел
+	std::srand(static_cast<unsigned int>(std::time(NULL)));
 
-    // Создание матриц на стеке и в куче
-    Matrix stackm(2, 10);
-    Matrix &heapm = *new Matrix;
+	// Создание матриц на стеке и в куче
+	Matrix stackm(2, 10);
+	Matrix &heapm = *new Matrix;
 
-    // Вывод только созданных матриц
-    std::cout << "Матрица 1: \n";
-    stackm.Print();
-    std::cout << "Матрица 2: \n";
-    heapm.Print();
+	// Вывод только созданных матриц
+	std::cout << "Матрица 1: \n";
+	stackm.Print();
+	std::cout << "Матрица 2: \n";
+	heapm.Print();
 
-    // Заполнение матриц случайными числами
-    std::cout << "\nРандомизация:\n";
-    stackm.Randomise(1488, 1337);
-    heapm.Randomise(10,1);
+	// Заполнение матриц случайными числами
+	std::cout << "\nРандомизация:\n";
+	stackm.Randomise(1488, 1337);
+	heapm.Randomise(10, 1);
 
-    // Вывод матриц после изменения
-    std::cout << "Матрица 1: \n";
-    stackm.Print();
-    std::cout << "Матрица 2: \n";
-    heapm.Print();
-    std::cout << '\n';
+	// Вывод матриц после изменения
+	std::cout << "Матрица 1: \n";
+	stackm.Print();
+	std::cout << "Матрица 2: \n";
+	heapm.Print();
+	std::cout << '\n';
 
-    // Очистка матрицы на куче из памяти
-    delete &heapm;
-    return EXIT_SUCCESS;
+	// Очистка матрицы на куче из памяти
+	delete &heapm;
+	return EXIT_SUCCESS;
 }
