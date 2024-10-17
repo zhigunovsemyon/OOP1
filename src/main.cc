@@ -24,30 +24,14 @@
 int main(void) {
 	// Инициализация генератора случайных чисел
 	std::srand(static_cast<unsigned int>(std::time(NULL)));
+	// Создание прямоугольной матрицы
+	Matrix &heapm = *new Matrix(1,1);
 
-	// Создание матриц на стеке и в куче
-	Matrix stackm(2, 10);
-	Matrix &heapm = *new Matrix;
+	int num;
+	std::cin >> num;
+	heapm.SetElement(12, -12, num);
+	std::cout << "Э-т 0,0 " << heapm.GetElement(-1,-1) << '\n';
 
-	// Вывод только созданных матриц
-	std::cout << "Матрица 1: \n";
-	stackm.Print();
-	std::cout << "Матрица 2: \n";
-	heapm.Print();
-
-	// Заполнение матриц случайными числами
-	std::cout << "\nРандомизация:\n";
-	stackm.Randomise(1488, 1337);
-	heapm.Randomise(10, 1);
-
-	// Вывод матриц после изменения
-	std::cout << "Матрица 1: \n";
-	stackm.Print();
-	std::cout << "Матрица 2: \n";
-	heapm.Print();
-	std::cout << '\n';
-
-	// Очистка матрицы на куче из памяти
 	delete &heapm;
 	return EXIT_SUCCESS;
 }
