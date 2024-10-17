@@ -32,7 +32,10 @@ public:
 	void Randomise(int max, int min);
 
 	/*Метод зануления матрицы*/
-	void Zero();
+	inline void Zero() { this->FillWith(0); }
+
+	/*Метод заполнения матрицы одним числом*/
+	void FillWith(int);
 
 	/*Изменение элемента строки line, колонки column матрицы
 	 * Поддерживается индексация с конца через индексы <0.
