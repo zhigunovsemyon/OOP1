@@ -111,10 +111,10 @@ long Matrix::Get_line_count() {
 }
 
 /*Метод зануления матрицы*/
-void Matrix::Zero() {
+void Matrix::FillWith(int num) {
 	for (long i = 0; i < this->line_count; i++) {
 		for (long j = 0; j < this->column_count; j++)
-			ptr[i][j] = 0;
+			ptr[i][j] = num;
 	}
 }
 
