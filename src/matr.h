@@ -17,7 +17,7 @@ class Matrix {
 	~Matrix();
 
 	/*Получение размера строки line*/
-	std::size_t Get_column_size(long line);
+	long Get_column_size(long line);
 
 	// Получение числа строк матрицы
 	long Get_line_count();
@@ -34,7 +34,12 @@ class Matrix {
 	/*Метод зануления матрицы*/
 	void Zero();
 
-	/*Доступ к элементу строки line, колонки column матрицы
+	/*Изменение элемента строки line, колонки column матрицы
+	* Поддерживается индексация с конца через индексы <0.
+	* Возврат false при неудаче, true при успехе*/
+	bool SetElement(long line, long column, int num);
+
+	/*Чтение элемента строки line, колонки column матрицы
 	* Поддерживается индексация с конца через индексы <0*/
 	int& GetElement(long line, long column);
 };
