@@ -31,6 +31,7 @@ class Matrix {
 	/*Метод зануления матрицы*/
 	void Zero();
 
-	/*Доступ к определённой строке line матрицы*/
-	int *operator[](long line);
+	/*Доступ к элементу строки line, колонки column матрицы
+	* Поддерживается индексация с конца через индексы <0*/
+	int& GetElement(long line, long column);
 };

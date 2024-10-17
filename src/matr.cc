@@ -1,6 +1,6 @@
-#include "matr.h"  
+#include "matr.h"
 #include <iostream> /*std::size_t; std::rand(); std::cout*/
-#include <utility> /*swap() */
+#include <utility>  /*swap() */
 
 // Вывод трассировки
 std::ostream &trace = std::cout;
@@ -8,12 +8,18 @@ std::ostream &trace = std::cout;
 // Конструктор квадратной матрицы, либо пустой
 Matrix::Matrix(long size) {
 	::trace << "Адрес созданного объекта: " << this << '\n';
+
+	if (size <= 0) {
+		this->column_count = this->line_count = 0;
+		this->ptr = nullptr;
+		return;
+	}
 	// Задание числа строк
 	this->line_count = size;
+	this->column_count = size;
 
 	// Выделение памяти под вектор указателей
-	this->ptr =
-		(size) ? new int *[static_cast<std::size_t>(size)] : nullptr;
+	this->ptr = new int *[static_cast<std::size_t>(size)];
 	::trace << "Адрес созданной памяти: " << this->ptr << '\n';
 
 	// Выделение памяти под каждую строку
@@ -30,8 +36,16 @@ Matrix::Matrix(long size) {
 // Конструктор прямоугольной матрицы матрицы
 Matrix::Matrix(long lines, long columns) {
 	::trace << "Адрес созданного объекта: " << this << '\n';
+
+	if (lines <= 0 || columns <= 0) {
+		this->column_count = this->line_count = 0;
+		this->ptr = nullptr;
+		return;
+	}
+
 	// Задание числа строк
 	this->line_count = lines;
+	this->column_count = columns;
 
 	// Выделение памяти под вектор указателей
 	this->ptr = new int *[static_cast<std::size_t>(lines)];
@@ -105,13 +119,14 @@ void Matrix::Zero() {
 }
 
 /*Доступ к определённой строке line матрицы*/
-int *Matrix::operator[](long line) {
+int &Matrix::GetElement(long line, long column) {
 	/*Если пользователь запросил отрицательный элемент, отсчитывается
 	 *соответствующий элемент с конца*/
+	if (column < 0)
+		column = this->column_count + column;
 	if (line < 0)
 		line = this->line_count + line;
 	/*Если запрашиваемая строка находится за пределами матрицы,
 	 *возвращается null, что приведёт к падению программы*/
-	return (line < this->line_count && line >= 0) ? this->ptr[line]
-						      : nullptr;
+	return this->ptr[line][column];
 }
