@@ -1,4 +1,5 @@
-#include "matr.h"  /*includes iostream*/
+#include "matr.h"  
+#include <iostream> /*std::size_t; std::rand(); std::cout*/
 #include <utility> /*swap() */
 
 // Вывод трассировки
