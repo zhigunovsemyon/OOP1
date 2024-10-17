@@ -1,22 +1,23 @@
-#include "matr.h" /*includes iostream*/
+#include "matr.h"  /*includes iostream*/
 #include <utility> /*swap() */
 
 // Вывод трассировки
 std::ostream &trace = std::cout;
 
 // Конструктор квадратной матрицы, либо пустой
-Matrix::Matrix(std::size_t size) {
+Matrix::Matrix(long size) {
 	::trace << "Адрес созданного объекта: " << this << '\n';
 	// Задание числа строк
 	this->line_count = size;
 
 	// Выделение памяти под вектор указателей
-	this->ptr = (size) ? new int *[size] : nullptr;
+	this->ptr =
+		(size) ? new int *[static_cast<std::size_t>(size)] : nullptr;
 	::trace << "Адрес созданной памяти: " << this->ptr << '\n';
 
 	// Выделение памяти под каждую строку
-	for (std::size_t i = 0; i < size; i++) {
-		this->ptr[i] = new int[size];
+	for (long i = 0; i < size; i++) {
+		this->ptr[i] = new int[static_cast<std::size_t>(size)];
 		::trace << "Выделение памяти под строку " << i
 			<< " по адресу: " << this->ptr[i] << '\n';
 	}
@@ -26,18 +27,18 @@ Matrix::Matrix(std::size_t size) {
 }
 
 // Конструктор прямоугольной матрицы матрицы
-Matrix::Matrix(std::size_t lines, std::size_t columns) {
+Matrix::Matrix(long lines, long columns) {
 	::trace << "Адрес созданного объекта: " << this << '\n';
 	// Задание числа строк
 	this->line_count = lines;
 
 	// Выделение памяти под вектор указателей
-	this->ptr = new int *[lines];
+	this->ptr = new int *[static_cast<std::size_t>(lines)];
 	::trace << "Адрес созданной памяти: " << this->ptr << '\n';
 
 	// Выделение памяти под каждую строку
-	for (std::size_t i = 0; i < lines; i++) {
-		this->ptr[i] = new int[columns];
+	for (long i = 0; i < lines; i++) {
+		this->ptr[i] = new int[static_cast<std::size_t>(columns)];
 		::trace << "Выделение памяти под строку " << i
 			<< " по адресу: " << this->ptr[i] << '\n';
 	}
@@ -66,8 +67,8 @@ Matrix::~Matrix() {
 
 // Вывод матрицы в stdout
 void Matrix::Print() const {
-	for (std::size_t i = 0; i < this->line_count; i++) {
-		for (std::size_t j = 0; j < this->column_count; j++)
+	for (long i = 0; i < this->line_count; i++) {
+		for (long j = 0; j < this->column_count; j++)
 			std::cout << ptr[i][j] << ' ';
 
 		std::cout << '\n';
@@ -80,24 +81,24 @@ void Matrix::Randomise(int max, int min) {
 	if (min > max)
 		std::swap(max, min);
 
-	for (std::size_t i = 0; i < this->line_count; i++) {
-		for (std::size_t j = 0; j < this->column_count; j++)
+	for (long i = 0; i < this->line_count; i++) {
+		for (long j = 0; j < this->column_count; j++)
 			this->ptr[i][j] = min + std::rand() % (max + 1 - min);
 	}
 }
 
-std::size_t Matrix::Get_column_count(){
+long Matrix::Get_column_count() {
 	return this->column_count;
 }
 
-std::size_t Matrix::Get_line_count(){
+long Matrix::Get_line_count() {
 	return this->line_count;
 }
 
 /*Метод зануления матрицы*/
 void Matrix::Zero() {
-	for (std::size_t i = 0; i < this->line_count; i++) {
-		for (std::size_t j = 0; j < this->column_count; j++)
+	for (long i = 0; i < this->line_count; i++) {
+		for (long j = 0; j < this->column_count; j++)
 			ptr[i][j] = 0;
 	}
 }
@@ -107,8 +108,9 @@ int *Matrix::operator[](long line) {
 	/*Если пользователь запросил отрицательный элемент, отсчитывается
 	 *соответствующий элемент с конца*/
 	if (line < 0)
-		line = static_cast<long>(this->line_count) + line;
+		line = this->line_count + line;
 	/*Если запрашиваемая строка находится за пределами матрицы,
 	 *возвращается null, что приведёт к падению программы*/
-	return (line < static_cast<long>(this->line_count) && line >= 0) ? this->ptr[line] : nullptr;
+	return (line < this->line_count && line >= 0) ? this->ptr[line]
+						      : nullptr;
 }
