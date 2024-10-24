@@ -2,7 +2,7 @@
 
 class Matrix {
 private:
-	int **ptr;	   // Указатель на непосредственно матрицу
+	int **ptr; // Указатель на непосредственно матрицу
 	long column_count; // Вектор размеров строк
 	long line_count;   // Число строк
 
@@ -16,14 +16,14 @@ public:
 	// Деструктор
 	~Matrix();
 
-	/*Получение размера строки line*/
-	long Get_column_size(long line);
+	// Заполнение матрицы из стандартного ввода
+	void Fill(long line = 0, long column = 0);
 
 	// Получение числа строк матрицы
-	long Get_line_count();
+	inline long Get_line_count() const {return this->line_count;}
 
 	// Получение числа строк матрицы
-	long Get_column_count();
+	inline long Get_column_count() const { return this->column_count; }
 
 	// Вывод матрицы в stdout
 	void Print() const;
@@ -44,5 +44,5 @@ public:
 
 	/*Чтение элемента строки line, колонки column матрицы
 	 * Поддерживается индексация с конца через индексы <0*/
-	int &GetElement(long line, long column);
+	int &GetElement(long line, long column) const;
 };

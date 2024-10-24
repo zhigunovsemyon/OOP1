@@ -24,13 +24,23 @@
 int main(void) {
 	// Инициализация генератора случайных чисел
 	std::srand(static_cast<unsigned int>(std::time(NULL)));
-	// Создание прямоугольной матрицы
-	Matrix &heapm = *new Matrix(1,1);
 
-	int num;
-	std::cin >> num;
-	heapm.SetElement(12, -12, num);
-	std::cout << "Э-т 0,0 " << heapm.GetElement(-1,-1) << '\n';
+	// Создание прямоугольной матрицы
+	int m, n;
+	std::cout << "Число строк: ";
+	std::cin >> m;
+	std::cout << "Число столбцов: ";
+	std::cin >> n;
+	Matrix &heapm = *new Matrix(m, n);
+	std::cout << "Конечные размеры матрицы: "
+		<< heapm.Get_line_count() << " на "
+		<< heapm.Get_column_count() << '\n';
+
+	heapm.Fill(1,-1);
+
+	std::cout << "Матрица:\n";
+	heapm.Print();
+	std::cout << "Э-т -1,-1 " << heapm.GetElement(-1,-1) << '\n';
 
 	delete &heapm;
 	return EXIT_SUCCESS;

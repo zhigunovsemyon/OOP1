@@ -102,14 +102,6 @@ void Matrix::Randomise(int max, int min) {
 	}
 }
 
-long Matrix::Get_column_count() {
-	return this->column_count;
-}
-
-long Matrix::Get_line_count() {
-	return this->line_count;
-}
-
 /*Метод зануления матрицы*/
 void Matrix::FillWith(int num) {
 	for (long i = 0; i < this->line_count; i++) {
@@ -119,7 +111,7 @@ void Matrix::FillWith(int num) {
 }
 
 /*Доступ к определённой строке line матрицы*/
-int &Matrix::GetElement(long line, long column) {
+int &Matrix::GetElement(long line, long column) const {
 	/*Если пользователь запросил отрицательный элемент, отсчитывается
 	 *соответствующий элемент с конца*/
 	if (column < 0)
@@ -151,4 +143,24 @@ bool Matrix::SetElement(long line, long column, int num) {
 	/*Запись элемента, возврат флага успешной записи*/
 	this->ptr[line][column] = num;
 	return true;
+}
+
+void Matrix::Fill(long line, long column) {
+	/*Если пользователь указал отрицательный элемент, отсчитывается
+	 *соответствующий элемент с конца*/
+	if (column < 0)
+		column = this->column_count + column;
+	if (line < 0)
+		line = this->line_count + line;
+
+	/*Если итоговый индекс отрицательный, запись не осуществляется*/
+	if (line < 0 || column < 0)
+		return;
+
+	for (long i = line; i < this->line_count; ++i) {
+		for (long j = column; j < this->column_count; ++j) {
+			std::cout << '[' << i << "][" << j << "] = ";
+			std::cin >> this->ptr[i][j];
+		}
+	}
 }
