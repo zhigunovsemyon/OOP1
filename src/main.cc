@@ -33,14 +33,14 @@ int main(void) {
 	std::cin >> n;
 	Matrix &heapm = *new Matrix(m, n);
 	std::cout << "Конечные размеры матрицы: "
-		<< heapm.Get_line_count() << " на "
-		<< heapm.Get_column_count() << '\n';
+		<< heapm.get_line_count() << " на "
+		<< heapm.get_column_count() << '\n';
 
-	heapm.Fill(1,-1);
+	heapm.fill(1,-1);
 
 	std::cout << "Матрица:\n";
-	heapm.Print();
-	std::cout << "Э-т -1,-1 " << heapm.GetElement(-1,-1) << '\n';
+	heapm.print();
+	std::cout << "Э-т -1,-1 " << heapm.get_element(-1,-1) << '\n';
 
 	delete &heapm;
 	return EXIT_SUCCESS;

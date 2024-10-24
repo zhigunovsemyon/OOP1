@@ -30,7 +30,7 @@ Matrix::Matrix(long size) {
 	}
 
 	// Зануление матрицы
-	this->Zero();
+	this->zero();
 }
 
 // Конструктор прямоугольной матрицы матрицы
@@ -59,7 +59,7 @@ Matrix::Matrix(long lines, long columns) {
 	}
 
 	// Зануление матрицы
-	this->Zero();
+	this->zero();
 }
 
 // Деструктор
@@ -81,7 +81,7 @@ Matrix::~Matrix() {
 }
 
 // Вывод матрицы в stdout
-void Matrix::Print() const {
+void Matrix::print() const {
 	for (long i = 0; i < this->line_count; i++) {
 		for (long j = 0; j < this->column_count; j++)
 			std::cout << ptr[i][j] << ' ';
@@ -91,7 +91,7 @@ void Matrix::Print() const {
 }
 
 /*Метод для заполнения матрицы случайными числами*/
-void Matrix::Randomise(int max, int min) {
+void Matrix::randomise(int max, int min) {
 	/*Переворот значений min и max*/
 	if (min > max)
 		std::swap(max, min);
@@ -103,7 +103,7 @@ void Matrix::Randomise(int max, int min) {
 }
 
 /*Метод зануления матрицы*/
-void Matrix::FillWith(int num) {
+void Matrix::fill_with(int num) {
 	for (long i = 0; i < this->line_count; i++) {
 		for (long j = 0; j < this->column_count; j++)
 			ptr[i][j] = num;
@@ -111,7 +111,7 @@ void Matrix::FillWith(int num) {
 }
 
 /*Доступ к определённой строке line матрицы*/
-int &Matrix::GetElement(long line, long column) const {
+int &Matrix::get_element(long line, long column) const {
 	/*Если пользователь запросил отрицательный элемент, отсчитывается
 	 *соответствующий элемент с конца*/
 	if (column < 0)
@@ -124,7 +124,7 @@ int &Matrix::GetElement(long line, long column) const {
 }
 
 // Возврат false при неудаче, true при успехе
-bool Matrix::SetElement(long line, long column, int num) {
+bool Matrix::set_element(long line, long column, int num) {
 	/*Если пользователь указал отрицательный элемент, отсчитывается
 	 *соответствующий элемент с конца*/
 	if (column < 0)
@@ -145,7 +145,7 @@ bool Matrix::SetElement(long line, long column, int num) {
 	return true;
 }
 
-void Matrix::Fill(long line, long column) {
+void Matrix::fill(long line, long column) {
 	/*Если пользователь указал отрицательный элемент, отсчитывается
 	 *соответствующий элемент с конца*/
 	if (column < 0)
