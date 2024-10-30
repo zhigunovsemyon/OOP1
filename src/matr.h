@@ -8,10 +8,10 @@ private:
 
 public:
 	// Конструктор квадратной матрицы, либо пустой
-	Matrix(long size = 0);
+	Matrix(long const size = 0);
 
 	// Конструктор прямоугольной матрицы матрицы
-	Matrix(long lines, long rows);
+	Matrix(long const lines, long const rows);
 
 	// Деструктор
 	~Matrix();

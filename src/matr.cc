@@ -6,7 +6,7 @@
 std::ostream &trace = std::cout;
 
 // Конструктор квадратной матрицы, либо пустой
-Matrix::Matrix(long size) {
+Matrix::Matrix(long const size) {
 	::trace << "Адрес созданного объекта: " << this << '\n';
 
 	if (size <= 0) {
@@ -34,7 +34,7 @@ Matrix::Matrix(long size) {
 }
 
 // Конструктор прямоугольной матрицы матрицы
-Matrix::Matrix(long lines, long columns) {
+Matrix::Matrix(long const lines, long const columns) {
 	::trace << "Адрес созданного объекта: " << this << '\n';
 
 	if (lines <= 0 || columns <= 0) {
@@ -103,7 +103,7 @@ void Matrix::randomise(int max, int min) {
 }
 
 /*Метод зануления матрицы*/
-void Matrix::fill_with(int num) {
+void Matrix::fill_with(int const num) {
 	for (long i = 0; i < this->line_count_; i++) {
 		for (long j = 0; j < this->column_count_; j++)
 			ptr_[i][j] = num;
