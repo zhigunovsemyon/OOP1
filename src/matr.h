@@ -2,9 +2,9 @@
 
 class Matrix {
 private:
-	int **ptr; // Указатель на непосредственно матрицу
-	long column_count; // Вектор размеров строк
-	long line_count;   // Число строк
+	int **ptr_; // Указатель на непосредственно матрицу
+	long column_count_; // Вектор размеров строк
+	long line_count_;   // Число строк
 
 public:
 	// Конструктор квадратной матрицы, либо пустой
@@ -20,10 +20,10 @@ public:
 	void fill(long line = 0, long column = 0);
 
 	// Получение числа строк матрицы
-	inline long get_line_count() const {return this->line_count;}
+	inline long get_line_count() const {return this->line_count_;}
 
 	// Получение числа строк матрицы
-	inline long get_column_count() const { return this->column_count; }
+	inline long get_column_count() const { return this->column_count_; }
 
 	// Вывод матрицы в stdout
 	void print() const;
