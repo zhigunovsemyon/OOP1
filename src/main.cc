@@ -40,12 +40,17 @@ int main(void) {
 		<< heapm.get_line_count() << " на "
 		<< heapm.get_column_count() << '\n';
 
-	heapm.fill(1,-1);
+	heapm.fill();
 
 	std::cout << "Матрица:\n";
 	heapm.print();
-	std::cout << "Э-т -1,-1 " << heapm.get_element(-1,-1) << '\n';
 
+	Matrix *m2 = new Matrix(heapm);
 	delete &heapm;
+
+	std::cout << "Матрица 2:\n";
+	m2->print();
+	delete m2;
+
 	return EXIT_SUCCESS;
 }

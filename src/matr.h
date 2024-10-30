@@ -18,6 +18,9 @@ public:
 	// Конструктор прямоугольной матрицы матрицы
 	Matrix(long const lines, long const rows);
 
+	// Конструктор копирования
+	Matrix(Matrix const &other);
+
 	// Деструктор
 	~Matrix();
 

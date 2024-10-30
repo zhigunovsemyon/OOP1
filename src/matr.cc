@@ -1,4 +1,5 @@
 #include "matr.h"
+#include <cstring>  /*std::memcpy()*/
 #include <iostream> /*std::size_t; std::rand(); std::cout*/
 #include <utility>  /*swap() */
 
@@ -44,6 +45,18 @@ Matrix::Matrix(long const lines, long const columns) {
 	this->constructor_(lines, columns);
 	// Зануление матрицы
 	this->zero();
+}
+
+Matrix::Matrix(Matrix const &other) {
+	// Создание новой матрицы с идентичной размерностью
+	this->constructor_(other.line_count_, other.column_count_);
+
+	/*Копирование содержимого другой матрицы в данную*/
+	for (long i = 0; i < other.line_count_; ++i) {
+		std::memcpy(this->ptr_[i], other.ptr_[i],
+			    sizeof(ptr_[i][0]) *
+				    (std::size_t)other.column_count_);
+	}
 }
 
 // Деструктор
