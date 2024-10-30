@@ -5,39 +5,10 @@
 // Вывод трассировки
 std::ostream &trace = std::cout;
 
-// Конструктор квадратной матрицы, либо пустой
-Matrix::Matrix(long const size) {
+void Matrix::constructor_(long const lines, long const rows) {
 	::trace << "Адрес созданного объекта: " << this << '\n';
 
-	if (size <= 0) {
-		this->column_count_ = this->line_count_ = 0;
-		this->ptr_ = nullptr;
-		return;
-	}
-	// Задание числа строк
-	this->line_count_ = size;
-	this->column_count_ = size;
-
-	// Выделение памяти под вектор указателей
-	this->ptr_ = new int *[static_cast<std::size_t>(size)];
-	::trace << "Адрес созданной памяти: " << this->ptr_ << '\n';
-
-	// Выделение памяти под каждую строку
-	for (long i = 0; i < size; i++) {
-		this->ptr_[i] = new int[static_cast<std::size_t>(size)];
-		::trace << "Выделение памяти под строку " << i
-			<< " по адресу: " << this->ptr_[i] << '\n';
-	}
-
-	// Зануление матрицы
-	this->zero();
-}
-
-// Конструктор прямоугольной матрицы матрицы
-Matrix::Matrix(long const lines, long const columns) {
-	::trace << "Адрес созданного объекта: " << this << '\n';
-
-	if (lines <= 0 || columns <= 0) {
+	if (lines <= 0 || rows <= 0) {
 		this->column_count_ = this->line_count_ = 0;
 		this->ptr_ = nullptr;
 		return;
@@ -45,7 +16,7 @@ Matrix::Matrix(long const lines, long const columns) {
 
 	// Задание числа строк
 	this->line_count_ = lines;
-	this->column_count_ = columns;
+	this->column_count_ = rows;
 
 	// Выделение памяти под вектор указателей
 	this->ptr_ = new int *[static_cast<std::size_t>(lines)];
@@ -53,11 +24,24 @@ Matrix::Matrix(long const lines, long const columns) {
 
 	// Выделение памяти под каждую строку
 	for (long i = 0; i < lines; i++) {
-		this->ptr_[i] = new int[static_cast<std::size_t>(columns)];
+		this->ptr_[i] = new int[static_cast<std::size_t>(rows)];
 		::trace << "Выделение памяти под строку " << i
 			<< " по адресу: " << this->ptr_[i] << '\n';
 	}
+}
 
+// Конструктор квадратной матрицы, либо пустой
+Matrix::Matrix(long const size) {
+	// Вызов конструктора
+	this->constructor_(size, size);
+	// Зануление матрицы
+	this->zero();
+}
+
+// Конструктор прямоугольной матрицы матрицы
+Matrix::Matrix(long const lines, long const columns) {
+	// Вызов конструктора
+	this->constructor_(lines, columns);
 	// Зануление матрицы
 	this->zero();
 }

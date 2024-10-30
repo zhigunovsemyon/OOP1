@@ -2,9 +2,14 @@
 
 class Matrix {
 private:
-	int **ptr_; // Указатель на непосредственно матрицу
+	/*Сокрытые поля*/
+	int **ptr_;	    // Указатель на непосредственно матрицу
 	long column_count_; // Вектор размеров строк
 	long line_count_;   // Число строк
+
+	/*Сокрытые методы*/
+	void constructor_(long const lines,
+			  long const rows); // Общий конструктор
 
 public:
 	// Конструктор квадратной матрицы, либо пустой
@@ -20,7 +25,7 @@ public:
 	void fill(long line = 0, long column = 0);
 
 	// Получение числа строк матрицы
-	inline long get_line_count() const {return this->line_count_;}
+	inline long get_line_count() const { return this->line_count_; }
 
 	// Получение числа строк матрицы
 	inline long get_column_count() const { return this->column_count_; }
