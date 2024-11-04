@@ -4,7 +4,7 @@ class Matrix {
 private:
 	/*Сокрытые поля*/
 	int **ptr_;	    // Указатель на непосредственно матрицу
-	long column_count_; // Вектор размеров строк
+	long row_count_; // Число столбцов
 	long line_count_;   // Число строк
 
 	/*Сокрытые методы*/
@@ -31,7 +31,7 @@ public:
 	inline long get_line_count() const { return this->line_count_; }
 
 	// Получение числа строк матрицы
-	inline long get_column_count() const { return this->column_count_; }
+	inline long get_row_count() const { return this->row_count_; }
 
 	// Вывод матрицы в stdout
 	void print() const;
