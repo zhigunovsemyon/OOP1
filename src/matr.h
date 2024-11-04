@@ -25,7 +25,7 @@ public:
 	~Matrix();
 
 	// Заполнение матрицы из стандартного ввода
-	void fill(long line = 0, long column = 0);
+	Matrix& fill(long line = 0, long column = 0);
 
 	// Получение числа строк матрицы
 	inline long get_line_count() const { return this->line_count_; }
@@ -37,13 +37,13 @@ public:
 	void print() const;
 
 	/*Метод для заполнения матрицы случайными числами*/
-	void randomise(int max, int min);
+	Matrix& randomise(int max, int min);
 
 	/*Метод зануления матрицы*/
-	inline void zero() { this->fill_with(0); }
+	inline Matrix& zero() { return this->fill_with(0); }
 
 	/*Метод заполнения матрицы одним числом*/
-	void fill_with(int);
+	Matrix& fill_with(int);
 
 	/*Изменение элемента строки line, колонки column матрицы
 	 * Поддерживается индексация с конца через индексы <0.

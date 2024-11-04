@@ -88,7 +88,7 @@ void Matrix::print() const {
 }
 
 /*Метод для заполнения матрицы случайными числами*/
-void Matrix::randomise(int max, int min) {
+Matrix &Matrix::randomise(int max, int min) {
 	/*Переворот значений min и max*/
 	if (min > max)
 		std::swap(max, min);
@@ -97,14 +97,18 @@ void Matrix::randomise(int max, int min) {
 		for (long j = 0; j < this->column_count_; j++)
 			this->ptr_[i][j] = min + std::rand() % (max + 1 - min);
 	}
+
+	return *this;
 }
 
 /*Метод зануления матрицы*/
-void Matrix::fill_with(int const num) {
+Matrix &Matrix::fill_with(int const num) {
 	for (long i = 0; i < this->line_count_; i++) {
 		for (long j = 0; j < this->column_count_; j++)
 			ptr_[i][j] = num;
 	}
+
+	return *this;
 }
 
 /*Доступ к определённой строке line матрицы*/
@@ -142,7 +146,7 @@ bool Matrix::set_element(long line, long column, int num) {
 	return true;
 }
 
-void Matrix::fill(long line, long column) {
+Matrix &Matrix::fill(long line, long column) {
 	/*Если пользователь указал отрицательный элемент, отсчитывается
 	 *соответствующий элемент с конца*/
 	if (column < 0)
@@ -152,7 +156,7 @@ void Matrix::fill(long line, long column) {
 
 	/*Если итоговый индекс отрицательный, запись не осуществляется*/
 	if (line < 0 || column < 0)
-		return;
+		return *this;
 
 	for (long i = line; i < this->line_count_; ++i) {
 		for (long j = column; j < this->column_count_; ++j) {
@@ -160,4 +164,6 @@ void Matrix::fill(long line, long column) {
 			std::cin >> this->ptr_[i][j];
 		}
 	}
+
+	return *this;
 }

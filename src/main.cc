@@ -40,10 +40,8 @@ int main(void) {
 	std::cout << "Конечные размеры матрицы: " << heapm.get_line_count()
 		  << " на " << heapm.get_column_count() << '\n';
 
-	heapm.fill();
-
 	std::cout << "Матрица:\n";
-	heapm.print();
+	heapm.randomise(0,100).print();
 
 	Matrix *m2 = new Matrix(heapm);
 	delete &heapm;
